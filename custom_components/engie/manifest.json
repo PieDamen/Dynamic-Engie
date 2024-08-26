@@ -1,6 +1,6 @@
 {
   "domain": "engie",
-  "name": "Engie Integration",
+  "name": "Engie",
   "version": "1.0.0",
   "requirements": ["requests"],
   "dependencies": [],
