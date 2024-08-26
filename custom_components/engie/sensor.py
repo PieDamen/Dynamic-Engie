@@ -3,7 +3,6 @@ import requests
 from datetime import date, timedelta
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
-from homeassistant.const import CONF_NAME, CONF_SCAN_INTERVAL, UNIT_PERCENTAGE
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -43,17 +42,12 @@ class EngieDataCoordinator(DataUpdateCoordinator):
             attributes = {
                 "state_class": "total",
                 "average": sum(today_data) / len(today_data) if today_data else 0,
-                "off_peak_1": min(today_data) if today_data else 0,
-                "off_peak_2": max(today_data) if today_data else 0,
-                "peak": max(today_data) if today_data else 0,
                 "min": min(today_data) if today_data else 0,
                 "max": max(today_data) if today_data else 0,
-                "mean": sum(today_data) / len(today_data) if today_data else 0,
                 "unit": "kWh",
                 "currency": "EUR",
                 "country": "Belgium",
                 "region": "BE",
-                "low_price": False,  # You might need additional logic to determine this
                 "price_percent_to_average": (sum(today_data) / len(today_data) if today_data else 0) / (sum(today_data) / len(today_data) if today_data else 1),
                 "today": today_data,
                 "tomorrow": tomorrow_data,
@@ -62,8 +56,8 @@ class EngieDataCoordinator(DataUpdateCoordinator):
                 "raw_tomorrow": [ {"start": entry["period"], "end": entry["end"], "value": entry["value"]} for entry in data["timeSeries"] if entry['period'].startswith(formatted_tomorrow)],
                 "current_price": max(today_data) if today_data else 0,
                 "additional_costs_current_hour": 0,
-                "price_in_cents": True,
-                "unit_of_measurement": "c/kWh",
+                "price_in_cents": False,
+                "unit_of_measurement": "EUR/kWh",
                 "device_class": "monetary",
                 "icon": "mdi:flash",
                 "friendly_name": "Engie Price Sensor"
