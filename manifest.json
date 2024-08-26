@@ -1,9 +1,9 @@
 {
-  "domain": "dynamic_engie",
-  "name": "Engie Dynamic",
-  "codeowners": [@piedamen],
+  "domain": "engie",
+  "name": "Engie Integration",
+  "version": "1.0.0",
+  "requirements": ["requests"],
   "dependencies": [],
-  "documentation": "https://github.com/PieDamen/Dynamic-Engie",
-  "iot_class": "cloud_polling",
-  "requirements": []
+  "codeowners": ["@piedamen"],
+  "iot_class": "local_polling"
 }
